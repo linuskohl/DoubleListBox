@@ -1,0 +1,31 @@
+{
+  "name": "DoubleListBox",
+  "version": "0.1",
+  "authors": [
+    {
+      "name": "Linus Kohl",
+      "email": "linus@munichresearch.com",
+      "url": "https://github.com/linuskohl"
+    }
+  ],
+  "homepage": "https://github.com/linuskohl/DoubleListBox",
+  "description": "Replace select element with a two listbox widget using Twitter Bootstrap. Has the ability to sort selected elements.",
+  "main": [
+    "src/js/doublelistbox.js",
+    "src/css/doublelistbox.css"
+  ],
+  "dependencies": [
+    "jquery": ">=3.2",
+    "bootstrap": ">=3.3"
+  ],
+  "keywords": [
+    "Dual list box",
+    "Double list box",
+    "Bootstrap",
+    "Select widget",
+    "jQuery",
+    "Input widget",
+  ],
+  "license": "MIT",
+  "private": true,
+}

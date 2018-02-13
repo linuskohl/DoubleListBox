@@ -1,0 +1,50 @@
+@CHARSET "UTF-8";
+
+.doublelistbox_container {
+	padding: 10px;
+}
+
+.doublelistbox_left {
+
+}
+
+.doublelistbox-div-buttons-col {
+	display:flex;
+	justify-content:center;
+	align-items: center;
+	flex-flow: column;
+}
+
+.doublelistbox-div-buttons {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.row-eq-height {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.doublelistbox-div-buttons > .btn {
+	margin: 5px 0;
+	width: 100%;
+}
+
+.doublelistbox_right {
+
+}
+
+.doublelistbox_container input.filter {
+	display: block;
+	width: 100%;
+	margin: 10px 0;
+}
+
+.doublelistbox_container select {
+	display: block;
+	width: 100%;
+	margin: 10px 0;
+}
