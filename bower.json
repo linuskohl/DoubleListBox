@@ -1,5 +1,5 @@
 {
-  "name": "DoubleListBox",
+  "name": "double-list-box",
   "version": "0.1",
   "authors": [
     {
@@ -14,18 +14,18 @@
     "src/js/doublelistbox.js",
     "src/css/doublelistbox.css"
   ],
-  "dependencies": [
-    "jquery": ">=3.2",
-    "bootstrap": ">=3.3"
-  ],
+  "dependencies": {
+    "bootstrap": ">=3.3",
+    "jquery": ">=3.2"
+  },
   "keywords": [
     "Dual list box",
     "Double list box",
     "Bootstrap",
     "Select widget",
     "jQuery",
-    "Input widget",
+    "Input widget"
   ],
   "license": "MIT",
-  "private": true,
+  "private": true
 }
