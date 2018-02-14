@@ -4,7 +4,7 @@ Replace select element with a two listbox widget using jQuery/Twitter Bootstrap.
 ![Screenshot](http://i66.tinypic.com/2isjrz9.jpg "Screenshot of the elements rendered")
 
 ### Demo
-[jsFiddle](https://jsfiddle.net/p6zwwtcd/){:target="_blank"}
+<a href="https://jsfiddle.net/p6zwwtcd/" target="_blank">jsFiddle</a>
 
 ## Requirements
 - "bootstrap": "~3.3.7"
