@@ -1,0 +1,30 @@
+=========================================================================
+==                          NOTICE file                                ==
+=========================================================================
+
+DoubleListBox is freely distributable under the terms of the MIT license.
+Copyright notice and permission notice shall be included in all copies or 
+substantial portions of the Software.
+
+DoubleListBox includes or is partially based on other 3rd party software as 
+indicated below
+
+=========================================================================
+==                          3rd Party Software                         ==
+=========================================================================
+
+1. Name                                 : bootstrap-duallistbox
+		Source                  : https://github.com/istvan-ujjmeszaros/bootstrap-duallistbox
+                Author                  : István Ujj-Mészáros
+		License                 : Apache License 2.0
+		License source          : https://github.com/istvan-ujjmeszaros/bootstrap-duallistbox/blob/master/LICENSE.md
+		Modified source         : YES
+		Additional comments	: Partially used code/ideas
+
+2. Name                                 : DualListBox
+		Source                  : https://github.com/Geodan/DualListBox
+                Author                  : Alex van den Hoogen
+		License                 : MIT License (MIT)
+		License source          : https://github.com/Geodan/DualListBox/blob/master/LICENSE
+		Modified source         : YES
+		Additional comments	: Partially used code/ideas

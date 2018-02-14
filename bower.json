@@ -9,7 +9,7 @@
     }
   ],
   "homepage": "https://github.com/linuskohl/DoubleListBox",
-  "description": "Replace select element with a two listbox widget using Twitter Bootstrap. Has the ability to sort selected elements.",
+  "description": "Replace select element with a two listbox widget using jQuery/Twitter Bootstrap. Has the ability to sort selected elements.",
   "main": [
     "src/js/doublelistbox.js",
     "src/css/doublelistbox.css"
