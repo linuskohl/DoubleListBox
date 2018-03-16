@@ -4,32 +4,33 @@
 * @author Linus Kohl <linus@munichresearch.com>
 * @copyright Copyright &copy; 2017 Linus Kohl
 * @license MIT
-*
+* lol
 * @link https://github.com/linuskohl/DoubleListBox
 *
 */
-;
 
 /**
 * DoubleListBox Object
 * @constructor
 */
 var DoubleListBox = function(element, settings) {
+    "use strict";
 
-    var pluginName = 'yii2_doublelistbox';
 
-    this.self = this;
-    this.sel_id_dst = element.attr("id");
-    this.sel_id_src = this.sel_id_dst + "_all";
-    this.el_dst = "#" + this.sel_id_dst;
-    this.el_src = "#" + this.sel_id_src;
-    this.dst = $(this.el_dst);
-    this.src = $(this.el_src);
+    var self = this;
 
-    this.settings = settings;
+    self.pluginName = 'yii2_doublelistbox';
+    self.sel_id_dst = element.attr("id");
+    self.sel_id_src = this.sel_id_dst + "_all";
+    self.el_dst = "#" + this.sel_id_dst;
+    self.el_src = "#" + this.sel_id_src;
+    self.dst = $(this.el_dst);
+    self.src = $(this.el_src);
+
+    self.settings = settings;
 
     // default settings
-    this.defaults = {
+    self.defaults = {
         "availableLabel": "Available",
         "selectedLabel": "Selected",
         "timeout": 400
@@ -38,7 +39,8 @@ var DoubleListBox = function(element, settings) {
     /**
      * Build the DOM and replace the original select element
      */
-    this.buildDOM = function () {
+    self.buildDOM = function () {
+
         var button_template = $("<button>", {"class": "btn btn-default"});
 
         // generate icons
@@ -52,32 +54,34 @@ var DoubleListBox = function(element, settings) {
                      .append($("<span>", {"class": "glyphicon glyphicon-list"})).attr("aria-hidden", true);
 
         // generate buttons
-        self.buttons           = Object;
-        self.buttons.up        = button_template.clone().attr("id", "up_"     + self.id_dst).append(icon_up);
-        self.buttons.down      = button_template.clone().attr("id", "down_"   + self.id_dst).append(icon_down);
-        self.buttons.add       = button_template.clone().attr("id", "add_"    + self.id_dst).append(icon_add);
-        self.buttons.addAll    = button_template.clone().attr("id", "addall_" + self.id_dst).append(icon_addAll);
-        self.buttons.delete    = button_template.clone().attr("id", "del_"    + self.id_dst).append(icon_delete);
-        self.buttons.deleteAll = button_template.clone().attr("id", "delall_" + self.id_dst).append(icon_deleteAll);
+        self.buttons           = {};
+        self.buttons.up        = button_template.clone().attr("id", "up_"     + self.sel_id_dst).append(icon_up);
+        self.buttons.down      = button_template.clone().attr("id", "down_"   + self.sel_id_dst).append(icon_down);
+        self.buttons.add       = button_template.clone().attr("id", "add_"    + self.sel_id_dst).append(icon_add);
+        self.buttons.addAll    = button_template.clone().attr("id", "addall_" + self.sel_id_dst).append(icon_addAll);
+        self.buttons.delete    = button_template.clone().attr("id", "del_"    + self.sel_id_dst).append(icon_delete);
+        self.buttons.deleteAll = button_template.clone().attr("id", "delall_" + self.sel_id_dst).append(icon_deleteAll);
+
+
 
         // generate container
-        self.container = $("<div>", {"class": "doublelistbox_container"}).attr("id", "table_simple_dual_listbox_" + self.id_dst);
-        row = $("<div>", {"class": "row row-eq-height"});
+        self.container = $("<div>", {"class": "doublelistbox_container"}).attr("id", "table_simple_dual_listbox_" + self.sel_id_dst);
+        var row = $("<div>", {"class": "row row-eq-height"});
 
         // copy selected list box to available list box
         self.el_list_available = $(self.el_dst).clone();
         self.el_list_available.attr("id", self.sel_id_src).empty();
         self.el_list_available.removeAttr("name");
 
-        clone = $(self.el_dst).clone(true);
+        var clone = $(self.el_dst).clone(true);
         self.el_list_selected  = clone.empty();
 
         self.src = self.el_list_available;
         self.dst = self.el_list_selected;
 
         // add bootstrap css class
-        self.src.addClass("form-control");
-        self.dst.addClass("form-control");
+        self.src.addClass("form-control select_box");
+        self.dst.addClass("form-control select_box");
 
         // distribute elements based on selected attribute
         $(self.el_dst).find('option').each(function () {
@@ -92,18 +96,18 @@ var DoubleListBox = function(element, settings) {
         self.el_filter_selected  = $("<input>", {"class": "filter filter_right form-control","type": "text", "placeholder":"Filter"});
 
         // generate "available" list
-        left_column = $("<div>", {"class": "doublelistbox_left col-md-5"});
+        var left_column = $("<div>", {"class": "doublelistbox_left col-md-5"});
         left_column.append($("<label>", {"class": "control-label"}).text(self.settings.availableLabel));
-        left_column_header = $("<div>", {"class": "row"});
+        var left_column_header = $("<div>", {"class": "row"});
         left_column_header.append($("<div>", {"class":"col-md-12"}).append(self.el_filter_available));
         left_column.append(left_column_header);
         left_column.append(self.el_list_available);
 
         // generate buttons container
-        buttons_column = $("<div>", {"class": "col-md-2 doublelistbox-div-buttons-col"})
+        var buttons_column = $("<div>", {"class": "col-md-2 doublelistbox-div-buttons-col"})
             .attr("role", "group")
             .attr("aria-label", "...");
-        buttons_container = $("<div>", {"class": "doublelistbox-div-buttons"});
+        var buttons_container = $("<div>", {"class": "doublelistbox-div-buttons"});
         buttons_container.append(self.buttons.up);
         buttons_container.append(self.buttons.add);
         buttons_container.append(self.buttons.addAll);
@@ -112,11 +116,10 @@ var DoubleListBox = function(element, settings) {
         buttons_container.append(self.buttons.down);
         buttons_column.append(buttons_container);
 
-
         // generate "selected" list
-        right_column = $("<div>", {"class": "doublelistbox_right col-md-5"});
+        var right_column = $("<div>", {"class": "doublelistbox_right col-md-5"});
         right_column.append($("<label>", {"class": "control-label"}).text(self.settings.selectedLabel));
-        right_column_header = $("<div>", {"class": "row"});
+        var right_column_header = $("<div>", {"class": "row"});
         right_column_header.append($("<div>", {"class":"col-md-12"}).append(self.el_filter_selected));
         right_column.append(right_column_header);
         right_column.append(self.el_list_selected);
@@ -138,7 +141,7 @@ var DoubleListBox = function(element, settings) {
      * Update options
      * @param [] updates - Array of options
      */
-    this.updateData = function (updates) {
+    self.updateData = function (updates) {
         // make local copy
         var update_data =  JSON.parse(JSON.stringify( updates ));
         // get selected
@@ -161,11 +164,11 @@ var DoubleListBox = function(element, settings) {
 
         $.each(update_data, function(value, title) {
             if(value && title) {
-                option = $("<option>", {
+                self.option = $("<option>", {
                     value: value,
                     text: title
                 });
-                self.src.append(option);
+                self.src.append(self.option);
             }
         });
 
@@ -178,19 +181,20 @@ var DoubleListBox = function(element, settings) {
     /**
      * Enable/disable buttons based on number of options
      */
-    this.toggleButtons = function () {
-        var available_has_items = (self.el_list_available.find("option").length === 0);
-        var selected_has_items  = (self.el_list_selected.find("option").length === 0);
-        self.buttons.add.prop("disabled", available_has_items);
-        self.buttons.addAll.prop("disabled", available_has_items);
-        self.buttons.deleteAll.prop("disabled", selected_has_items);
-        self.buttons.delete.prop("disabled", selected_has_items);
+    self.toggleButtons = function () {
+        var available_has_options = self.el_list_available.find("option").length !== 0;
+        var selected_has_options  = self.el_list_selected.find("option").length !== 0;
+
+        self.buttons.add.prop("disabled", !available_has_options);
+        self.buttons.addAll.prop("disabled", !available_has_options);
+        self.buttons.deleteAll.prop("disabled", !selected_has_options);
+        self.buttons.delete.prop("disabled", !selected_has_options);
     };
 
     /**
      * Moves the selected option inside the selected list up
      */
-    this.move_up = function () {
+    self.move_up = function () {
         $(self.el_dst + " option:selected").each(function () {
             var newPos = $(self.el_dst + " option").index(this) - 1;
             if (newPos > -1) {
@@ -213,7 +217,7 @@ var DoubleListBox = function(element, settings) {
     /**
      * Moves a selected option inside the selected list down
      */
-    this.move_down = function () {
+    self.move_down = function () {
         var cntOptions = $(self.el_dst + " option").length;
         $($(self.el_dst + " option:selected").get().reverse()).each(function () {
             var newPos = $(self.el_dst + " option").index(this) + 1;
@@ -239,7 +243,7 @@ var DoubleListBox = function(element, settings) {
     /**
      * Adds the selected options from the available list to the selected list
      */
-    this.add = function () {
+    self.add = function () {
         self.listbox_move(self.src, self.dst, false);
         return false;
     };
@@ -247,7 +251,7 @@ var DoubleListBox = function(element, settings) {
     /**
      * Adds all options from the available list to the selected list
      */
-    this.add_all = function () {
+    self.add_all = function () {
         self.listbox_move(self.src, self.dst, true);
         return false;
     };
@@ -255,7 +259,7 @@ var DoubleListBox = function(element, settings) {
     /**
      * Removes the selected options from the selected list
      */
-    this.delete = function () {
+    self.delete = function () {
         self.listbox_move(self.dst, self.src, false);
         return false;
     };
@@ -263,7 +267,7 @@ var DoubleListBox = function(element, settings) {
     /**
      * Removes all options from the selected list
      */
-    this.delete_all = function () {
+    self.delete_all = function () {
         self.listbox_move(self.dst, self.src, true);
         return false;
     };
@@ -274,7 +278,7 @@ var DoubleListBox = function(element, settings) {
      * @param {string}  dst - Selector destination list
      * @param {boolean} all - All elements
      */
-    this.listbox_move = function (src, dst, all) {
+    self.listbox_move = function (src, dst, all) {
         // select all elements if specified
         if (all) {
             src.find("option").prop("selected", true);
@@ -315,7 +319,7 @@ var DoubleListBox = function(element, settings) {
      * @param {string}  textinput - Selector for the input field
      * @param {integer} timeout - Timeout in milliseconds before the filter is applied
      */
-    this.initFilter = function (list, textinput, timeout) {
+     self.initFilter = function (list, textinput, timeout) {
         // filter is changed
         $(textinput).bind("change keyup", function () {
             // get filter string and build regexp
@@ -340,7 +344,7 @@ var DoubleListBox = function(element, settings) {
      * The filter regexp is stored in data("filter") of the list
      * @param {string}  list - Selector for the list element
      */
-    this.applyFilter = function(list) {
+    self.applyFilter = function(list) {
 
         var filter = list.data("filter");
         var options = [];
@@ -366,7 +370,7 @@ var DoubleListBox = function(element, settings) {
     /**
      * Delay function
      */
-    this.delay = (function () {
+    self.delay = (function () {
         var timer = 0;
         return function (callback, ms) {
             clearTimeout(timer);
@@ -379,32 +383,32 @@ var DoubleListBox = function(element, settings) {
      * @author Geodan, https://github.com/Geodan
      * */
     $.fn.isVisible = function () {
-        return !($(this).css('visibility') == 'hidden' || $(this).css('display') == 'none');
+        return !($(this).css('visibility') === 'hidden' || $(this).css('display') === 'none');
     };
 
     /**
      * Initialize the event listeners
      * */
-    this.initEventListeners = function () {
+    self.initEventListeners = function () {
         // init buttons
-        self.buttons.up.click(this.move_up);
-        self.buttons.down.click(this.move_down);
-        self.buttons.add.click(this.add);
-        self.buttons.addAll.click(this.add_all);
-        self.buttons.delete.click(this.delete);
-        self.buttons.deleteAll.click(this.delete_all);
+        self.buttons.up.click(self.move_up);
+        self.buttons.down.click(self.move_down);
+        self.buttons.add.click(self.add);
+        self.buttons.addAll.click(self.add_all);
+        self.buttons.delete.click(self.delete);
+        self.buttons.deleteAll.click(self.delete_all);
 
         // init filter
         self.initFilter(self.src, self.el_filter_available, self.settings.timeout);
         self.initFilter(self.dst, self.el_filter_selected, self.settings.timeout);
 
         self.dst.on("change", function() {
-            self.applyFilter($(this));
+            self.applyFilter($(self));
             self.toggleButtons();
         });
 
         self.src.on("change", function() {
-            self.applyFilter($(this));
+            self.applyFilter($(self));
             self.toggleButtons();
         });
 
@@ -429,7 +433,7 @@ var DoubleListBox = function(element, settings) {
      * Destroys the DoubleListBox and replaces it with the original select element
      * @returns {} original select element
      * */
-    this.destroy = function() {
+    self.destroy = function() {
         $(self.container).replaceWith(self.old_element);
         self.dst.data("initialized", false);
         return self.old_element;
@@ -439,11 +443,11 @@ var DoubleListBox = function(element, settings) {
      * Initializes the DoubleListBox
      * @returns {DoubleListBox} initialized object
      * */
-    this.init = function () {
+    self.init = function () {
         if(!self.dst.data("initialized")) {
             // apply defaults
-            self.settings = $.extend({}, self.defaults, self.options);
 
+            self.settings = $.extend({}, self.defaults, self.settings);
             // build DOM
             self.buildDOM();
             self.initEventListeners();
@@ -451,9 +455,10 @@ var DoubleListBox = function(element, settings) {
             self.toggleButtons();
 
             self.dst.data("initialized", true);
+            self.dst.data("doublelistbox", self);
         }
         return self;
     };
 
-    return this.init();
+    return self.init();
 };
